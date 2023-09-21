@@ -3,5 +3,6 @@
         "*.java": "java",
         "stddef.h": "c",
         "stdio.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }
