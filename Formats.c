@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 void arithmeticOperator() {
     int x = 5;
@@ -34,10 +35,36 @@ void inputDate() {
 
 }
 
+
+void mathFunctions() {
+    double A = sqrt(9);
+    double B = pow(2, 4);
+    int C = round(3.14);
+    int D = ceil(3.14);
+    int E = floor(3.99);
+    double F = fabs(-100);
+    double G = log(3);
+    double H = sin(45);
+    double I = cos(45);
+    double J = tan(45);
+
+    printf("\n%lf\n", A);
+    printf("\n%lf\n", B);
+    printf("\n%d\n", C);
+    printf("\n%d\n", D);
+    printf("\n%d\n", E);
+    printf("\n%lf\n", F);
+    printf("\n%lf\n", G);
+    printf("\n%lf\n", H);
+    printf("\n%lf\n", I);
+    printf("\n%lf\n", J);
+}
+
 int main() {
 
-    arithmeticOperator();
-    inputDate();
+    // arithmeticOperator();
+    // inputDate();
+    mathFunctions();
 
     return 0;
 }
