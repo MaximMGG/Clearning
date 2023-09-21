@@ -1,15 +1,21 @@
 #include <stdio.h>
 
+void arithmeticOperator() {
+    int x = 5;
+    int y = 2;
+
+    // float z = x / (float) y;
+    // printf("%f", z);
+
+    int z = x % y;
+    printf("%d", z);
+
+}
+
 int main() {
 
-
-    float item1 = 5.75;
-    float item2 = 10.00;
-    float item3 = 100.99;
-
-    printf("Item 1: $%8.2f\n", item1);
-    printf("Item 2: $%8.2f\n", item2);
-    printf("Item 3: $%8.2f\b", item3);
+    arithmeticOperator();
 
     return 0;
 }
+
