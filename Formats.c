@@ -36,6 +36,7 @@ void inputDate() {
 }
 
 
+
 void mathFunctions() {
     double A = sqrt(9);
     double B = pow(2, 4);
@@ -60,11 +61,32 @@ void mathFunctions() {
     printf("\n%lf\n", J);
 }
 
+void doubleCount() {
+    const double PI = 3.14159;
+    double radius;
+    double circumference;
+    double area;
+
+    printf("\nEnter radius of a circle: ");
+    scanf("%lf", &radius);
+
+    circumference = 2 * PI * radius;
+    area = PI * pow(radius, 2);
+
+    printf("circumference: %lf\n", circumference);
+    printf("area: %lf\n", area);
+
+
+
+}
+
+
 int main() {
 
     // arithmeticOperator();
     // inputDate();
-    mathFunctions();
+    // mathFunctions();
+    doubleCount();
 
     return 0;
 }
