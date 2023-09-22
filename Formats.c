@@ -3,6 +3,7 @@
 #include <math.h>
 
 void arithmeticOperator() {
+
     int x = 5;
     int y = 2;
 
@@ -75,10 +76,37 @@ void doubleCount() {
 
     printf("circumference: %lf\n", circumference);
     printf("area: %lf\n", area);
+}
 
+double hypotenuse() {
+
+    double a;
+    double b;
+    
+    printf("Please write a\n");
+    scanf("%lf", &a);
+
+    printf("Please write b\n");
+    scanf("%lf", &b);
+
+    return sqrt(pow(a, 2) + pow(b, 2));
+}
+
+
+void ifStatements() {
+    int age;
+
+    printf("Enter you age: ");
+    scanf("%d", &age);
+
+    if (age == 18) {
+        printf("You are now signed up!");
+
+    }
 
 
 }
+
 
 
 int main() {
@@ -86,7 +114,9 @@ int main() {
     // arithmeticOperator();
     // inputDate();
     // mathFunctions();
-    doubleCount();
+    // doubleCount();
+    // printf("Here is hypotenuse %lf\n", hypotenuse());
+    ifStatements();
 
     return 0;
 }
