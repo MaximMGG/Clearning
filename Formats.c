@@ -2,6 +2,8 @@
 #include <string.h>
 #include <math.h>
 
+
+
 void arithmeticOperator() {
 
     int x = 5;
@@ -107,6 +109,35 @@ void ifStatements() {
 
 }
 
+void switches() {
+
+    char grade;
+
+    printf("\nEnter a letter grade: ");
+    scanf("$c", &grade);
+
+    switch (grade) {
+        case 'A':
+            printf("perfect!\n");
+            break;
+        case 'B':
+            printf("You did good!\n");
+            break;
+        case 'C':
+            printf("You did ok!\n");
+            break;
+        case 'R':
+            printf("At least it's not an F!\n");
+            break;
+        case 'F':
+            printf("You failed!\n");
+            break;
+        default:
+            printf("Please write valid letter");
+    }
+
+}
+
 
 
 int main() {
@@ -116,7 +147,8 @@ int main() {
     // mathFunctions();
     // doubleCount();
     // printf("Here is hypotenuse %lf\n", hypotenuse());
-    ifStatements();
+    // ifStatements();
+    switches();
 
     return 0;
 }
