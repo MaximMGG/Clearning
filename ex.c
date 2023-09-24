@@ -18,5 +18,6 @@ int main() {
         printf("%Lf\n", start);
         start += step;
     }
+
     return 0;
 }

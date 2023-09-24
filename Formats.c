@@ -140,8 +140,49 @@ void switches() {
 }
 
 
+void operators() {
+
+    int t;
+    t = 5;
+
+    if (t > 10) {
+        printf("www");
+        printf("123123k");
+    }
+
+    else printf("gr");
+
+}
+
+void calculatie() {
+
+    int one;
+    int two;
+    char operator[10];
+
+    printf("Here is calculator!\nEnter first number: ");
+    scanf("%d", &one);
+
+    printf("Enter second number: ");
+    scanf("%d", &two);
+
+    printf("Enter symbol: ");
+    scanf("%s", &operator);
+
+
+    switch (operator[0]) {
+        case '*': {printf("%d", one * two); break;}
+        case '/' : {printf("%d", one / two); break;}
+        case '+' : {printf("%d", one + two); break;}
+        case '-' : {printf("%d", one - two); break;}
+        default : {printf("You didn't enter operator");}
+    }
+    printf("%s", operator);
+}
+
 
 int main() {
+
 
     // arithmeticOperator();
     // inputDate();
@@ -149,7 +190,9 @@ int main() {
     // doubleCount();
     // printf("Here is hypotenuse %lf\n", hypotenuse());
     // ifStatements();
-    switches();
+    // switches();
+    // operators();
+    calculatie();
 
     return 0;
 }
