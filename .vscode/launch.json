@@ -5,23 +5,25 @@
     "version": "0.2.0",
     "configurations": [
         {
-                "name": "(gdb) Launch",
-                "type": "cppdbg",
-                "request": "launch",
-                "program": "${workspaceFolder}/a.out",
-                "args": [],
-                "stopAtEntry": false,
-                "cwd": "${fileDirname}",
-                "environment": [],
-                "externalConsole": false,
+            "name": " (gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Formats.exe",
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "args": ["arg1","arg2"],
+            "customLaunchSetupCommands": [
+                {
+                    "text": "target-run",
+                    "description": "run target",
+                    "ignoreFailures": false
+                }
+            ],
+            "launchCompleteCommand": "exec-run",
+            "windows": {
                 "MIMode": "gdb",
-                "setupCommands": [
-                    {
-                        "description": "Enable pretty-printing for gdb",
-                        "text": "-enable-pretty-printing",
-                        "ignoreFailures": true
-                    },
-                ]
+                "miDebuggerPath": "C:/msys64/ucrt64/bin/gdb.exe"
+            }
         }
     ]
 }

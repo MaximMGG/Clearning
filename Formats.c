@@ -114,7 +114,8 @@ void switches() {
     char grade;
 
     printf("\nEnter a letter grade: ");
-    scanf("$c", &grade);
+
+    scanf("%c", &grade);
 
     switch (grade) {
         case 'A':
