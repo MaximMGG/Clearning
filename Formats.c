@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 
@@ -158,7 +159,7 @@ void calculatie() {
 
     int one;
     int two;
-    char operator[10];
+    char operator[] = "o";
 
     printf("Here is calculator!\nEnter first number: ");
     scanf("%d", &one);
@@ -180,8 +181,60 @@ void calculatie() {
     printf("%s", operator);
 }
 
+void printArray(int buf[], int length) {
+    int data_type;
+    // data_type = sizeof(buf) / sizeof(buf[0]);
+    // printf("%d", data_type);
+    // printf("%d\n", (*(&buf + 1) - buf));
+    int temp[] = {12341234, 2, 3, 4, 5};
+
+    data_type = *(&temp + 1) - temp;
+    printf("%d\n", data_type);
+    
+    for (int i = 0; i < length; i++) {
+        printf("%d\n",buf[i]);
+    }
+    
+}
+
+void proc1(int a)
+{
+    if (a < 10) {
+        printf("%d\n", a);
+    } else {
+        printf("Error...\n");
+    }
+}
+
+int proc2(int a, int b)
+{
+    return a > b ? 1 : 0;
+}
+
+void fuc() {
+    proc1(proc2(5, 15));
+    proc1(5);
+    proc1(15);
+}
+
+void easyFunc() {
+    int length = 10;
+
+    int buf[length];
+
+
+    for (int i = 0; i < length; i++) {
+        if(i < 5) {
+            buf[i] = 7;
+        } else {
+            buf[i] = pow(i, 2);
+        }
+    }
+    printArray(buf, length);
+}
 
 int main() {
+
 
 
     // arithmeticOperator();
@@ -192,7 +245,9 @@ int main() {
     // ifStatements();
     // switches();
     // operators();
-    calculatie();
+    // calculatie();
+    // fuc();
+    easyFunc();
 
     return 0;
 }
