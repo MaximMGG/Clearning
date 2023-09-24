@@ -2,7 +2,13 @@
     "files.associations": {
         "*.java": "java",
         "stddef.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "conio.h": "c",
+        "crtdefs.h": "c",
+        "corecrt.h": "c",
+        "_mingw.h": "c",
+        "_mingw_secapi.h": "c",
+        "winuser.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <conio.h>
+#include <locale.h>
+#include <windows.h>
+#include <winuser.h>
 
 
 
@@ -183,18 +187,39 @@ void calculatie() {
 
 void printArray(int buf[], int length) {
     int data_type;
-    // data_type = sizeof(buf) / sizeof(buf[0]);
+    // data_type = sizeof(buf) / sizeof(buf[0]); //do not work for arguments
+
     // printf("%d", data_type);
-    // printf("%d\n", (*(&buf + 1) - buf));
+    // printf("%d\n", (*(&buf + 1) - buf)); // do not work for arguments
     int temp[] = {12341234, 2, 3, 4, 5};
 
+    int le = sizeof(temp) / sizeof(temp[0]); // do not work for arguments
+
+    printf("%d\n", le);
+
     data_type = *(&temp + 1) - temp;
-    printf("%d\n", data_type);
+    // printf("%d\n", data_type);
     
     for (int i = 0; i < length; i++) {
         printf("%d\n",buf[i]);
     }
+
+    printf("\n");
+
+    // not work :(
+    // for (int i = 0; buf[i] != '\0'; i++) { // do not work for arguments
     
+    //     printf("%d\n", buf[i]);
+    // }
+
+    printf("\n");
+
+    for (int i = 0; temp[i] != '\0'; i++)
+    {
+        printf("%d\n", temp[i]);
+    }
+    
+
 }
 
 void proc1(int a)
@@ -233,6 +258,42 @@ void easyFunc() {
     printArray(buf, length);
 }
 
+void symbols() {
+
+    setlocale(LC_ALL, "Russian");
+    char ch = 'W';
+
+    printf("%c\n", ch);
+
+    // scanf("%c", ch);
+
+    // ch = getch();
+    // ch = getche();
+    putch('W');
+    printf("\n");
+    // *_cgets();
+
+    // printf("ch = %c", ch);
+
+    char s[10] = "Превет";
+
+    printf("%s\n", s);
+
+    sprintf(s, "12aaaasd");
+    s[4] = '\0';
+    printf("%s", s);
+
+    // scanf("%s", s);
+    gets(s);
+
+    // OemToChar(s, s);
+
+    printf("%s", s);
+
+}
+
+
+
 int main() {
 
 
@@ -247,7 +308,8 @@ int main() {
     // operators();
     // calculatie();
     // fuc();
-    easyFunc();
+    // easyFunc();
+    symbols();
 
     return 0;
 }
