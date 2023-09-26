@@ -67,7 +67,8 @@ int main() {
             y = oy;
         }
 
-        if (x == ax && y == ay) {            ax = rand() * 1.0 / RAND_MAX * 18 + 1;
+        if (x == ax && y == ay) {
+            ax = rand() * 1.0 / RAND_MAX * 18 + 1;
             ay = rand() * 1.0 / RAND_MAX * 8 + 1;
             count++;
         }
