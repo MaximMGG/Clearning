@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 
 
@@ -13,11 +14,10 @@ int main() {
     scanf("%lf", &end);
     printf("Please enter step size: ");
     scanf("%lf", &step);
-
     while (start != end) {
         printf("%Lf\n", start);
         start += step;
-    }
 
+    }
     return 0;
 }

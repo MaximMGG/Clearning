@@ -275,7 +275,7 @@ void symbols() {
 
     // printf("ch = %c", ch);
 
-    char s[10] = "Οπεβες";
+    char s[10] = "ΓΓ°Γ¥ΓΆΓ¥Γ²";
 
     printf("%s\n", s);
 
@@ -284,27 +284,12 @@ void symbols() {
     printf("%s", s);
 
     // scanf("%s", s);
-    // fgets(s);
+    gets(s);
 
     // OemToChar(s, s);
 
     printf("%s", s);
 
-}
-
-void arrayInCybe() {
-    int arr[9][9];
-    
-    arr[2][5];
-
-    for (int k = 0; k < 9; k++)
-    {
-        for (int i = 0; i < 9; i++) {
-            arr[k][i] = (i + 1) * (k + 1);
-            printf("%d\t", arr[k][i]);
-        }
-        puts("");
-    }
 }
 
 
@@ -324,8 +309,7 @@ int main() {
     // calculatie();
     // fuc();
     // easyFunc();
-    // symbols();
-    arrayInCybe();
+    symbols();
 
     return 0;
 }
