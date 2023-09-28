@@ -2,41 +2,39 @@
 #include <stdlib.h>
 
 
+typedef int cel;
+typedef struct table T;
+typedef struct Color col;
 
 
 struct sPoint {
     int x, y;
 } p;
+struct Color {
+    char *code;
+    char *name;
+} c;
 
 struct table {
     int x, y, z;
     char *name;
-    struct Color color;
-    
+    col color;
 } tab;
 
-struct Color {
-    char *code;
-    char *name;
-} color;
 
-
-typedef int cel;
-typedef struct sPoint T;
-
-void printTable(struct table t) {
-    printf("x -> %d\t, y -> %d\t, z -> %d\t", t.x, t.y, t.z);
-    prtntf("name of table is: %s\n", t.name);
+void printTable(T t) {
+    printf("x -> %d\t, y -> %d\t, z -> %d\n", t.x, t.y, t.z);
+    printf("name of table is: %s\n", t.name);
     printf("And color and code are : %s, %s", t.color.name, t.color.code);
 }
 
-struct table getTable() {
+T getTable() {
 
-    struct Color red;
+    col red;
     red.name = "Red";
     red.code = "0124x1";
 
-    struct table t;
+    T t;
     t.x = 10;
     t.y = 11;
     t.z = 11;
@@ -74,9 +72,8 @@ int main() {
     
     }
 
-    struct table b = (tab)getTable();
-    printTable(b);
-    
+    struct table tab = getTable();
+    printTable(tab);
 
     return 0;
 }
