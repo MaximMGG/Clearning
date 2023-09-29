@@ -10,5 +10,5 @@
         "_mingw_secapi.h": "c",
         "winuser.h": "c"
     },
-    "C_Cpp.errorSquiggles": "enabled"
+    "C_Cpp.errorSquiggles": "disabled"
 }

@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <windows.h>
 #include <math.h>
+#include <stdbool.h>
 
 
 #define width 66
@@ -18,14 +19,25 @@ typedef struct {
 typedef struct {
     float x, y;
     int xi, yi;
+    float alpha;
+    float speed;
 } TBall;
 
 char mas[height][width];
 TRocket rocket;
 TBall ball;
 
+void moveBall(float x, float y) {
+    ball.x = x;
+    ball.y = y;
+    ball.xi = (int) round(ball.x);
+    ball.yi = (int) round(ball.y);
+}
+
 void initBall() {
     moveBall(2, 2);
+    ball.alpha = -1;
+    ball.speed = 0.5;
 }
 
 void moveRocket(int x) {
@@ -37,12 +49,6 @@ void moveRocket(int x) {
 }
 
 
-void moveBall(int x, int y) {
-    ball.x = x;
-    ball.y = y;
-    ball.xi = (int) round(ball.x);
-    ball.yi = (int) round(ball.y);
-}
 
 void initRocket() {
     rocket.w = 7;
@@ -52,7 +58,7 @@ void initRocket() {
 
 
 void putBall() {
-    mas[ball.xi][ball.yi] = '*';
+    mas[ball.yi][ball.xi] = '*';
 }
 
 
@@ -65,9 +71,6 @@ void putRocket() {
     }
     
 }
-
-
-
 
 void init() {
     for (int i = 0; i < height - 1; i++) {
@@ -89,6 +92,18 @@ void show() {
     }
 }
 
+void autoMoveBall() {
+    if (ball.alpha < 0) {
+        ball.alpha += M_PI * 2;
+    }
+    if (ball.alpha > M_PI * 2) {
+        ball.alpha -= M_PI * 2;
+    }
+    moveBall(ball.x + cos(ball.alpha) * ball.speed,
+            ball.y + sin(ball.alpha) * ball.speed);
+    
+
+}
 
 
 
@@ -104,8 +119,16 @@ int main() {
     initRocket();
     initBall();
 
+    bool run = false;
+
+
     do
     {
+
+        if (run)
+            autoMoveBall();
+
+
         setCur(0, 0);
         init();
         putRocket();
@@ -115,8 +138,11 @@ int main() {
             moveRocket(rocket.x - 1);
         if (GetKeyState('D') < 0)
             moveRocket(rocket.x + 1);
+        if (GetKeyState('W') < 0)
+            run = true;
+        if (!run)
+            moveBall(rocket.x + rocket.w / 2, rocket.y -1);
         Sleep(10);
-        moveBall(rocket.x + rocket.w / 2, rocket.y - 1);
 
     } while (GetKeyState(VK_ESCAPE) >= 0);
 
