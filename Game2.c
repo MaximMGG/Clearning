@@ -27,6 +27,9 @@ char mas[height][width];
 TRocket rocket;
 TBall ball;
 
+int hitCount;
+int maxHitCount;
+
 void moveBall(float x, float y) {
     ball.x = x;
     ball.y = y;
@@ -87,6 +90,12 @@ void init() {
 void show() {
     for (int i = 0; i < height - 1; i++) {
         printf("%s", mas[i]);
+        if (i == 3) {
+            printf("    hit %i    ", hitCount);
+        }
+        if (i == 4) {
+            printf("    max %i    ", maxHitCount);
+        }
         if (i < height - 2)
             printf("\n");
     }
@@ -99,9 +108,32 @@ void autoMoveBall() {
     if (ball.alpha > M_PI * 2) {
         ball.alpha -= M_PI * 2;
     }
+    TBall bl = ball;
+
     moveBall(ball.x + cos(ball.alpha) * ball.speed,
             ball.y + sin(ball.alpha) * ball.speed);
     
+    if ((mas[ball.yi][ball.xi] == '#') || (mas[ball.yi][ball.xi] == '@')) {
+        if (mas[ball.yi][ball.xi] == '@') {
+            hitCount++;
+        }
+        if ((ball.xi != bl.xi) && (ball.yi != bl.yi)) {
+            if (mas[bl.yi][ball.xi] == mas[ball.yi][bl.xi]) {
+                bl.alpha = bl.alpha + M_PI;
+            } else {
+                if (mas[bl.yi][ball.xi] == '#')
+                    bl.alpha = (2 * M_PI - bl.alpha) + M_PI;
+                else
+                    bl.alpha = (2 * M_PI - bl.alpha);
+            }
+        } else if (ball.yi == bl.yi){
+            bl.alpha = (2 * M_PI - bl.alpha) + M_PI;
+        } else {
+            bl.alpha = (2 * M_PI - bl.alpha);
+        }
+        ball = bl;
+        autoMoveBall();
+    }
 
 }
 
@@ -127,6 +159,12 @@ int main() {
 
         if (run)
             autoMoveBall();
+
+        if (ball.yi > height - 4) {
+            run = false;
+            maxHitCount = hitCount > maxHitCount ? hitCount : maxHitCount;
+            hitCount = 0;
+        }
 
 
         setCur(0, 0);
