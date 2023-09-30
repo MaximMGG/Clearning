@@ -5,20 +5,34 @@
 
 int main() {
 
-    void *p;
+    char *mas = NULL;
 
-    int *x = NULL;
+    mas = malloc(1);
 
-    x = malloc(sizeof(int));
+    printf("%d\n", mas);
 
-    *x = 333;
+    mas[0] = 2;
+    mas[1] = 4;
+    mas[2] = 111;
+    mas[4] = 111;
 
-    printf("%d\n", *x);
-    printf("%d\n", x);
+    printf("%d\n", mas[0]);
+    printf("%d\n", mas[1]);
+    printf("%d\n", mas[2]);
+    printf("%d\n", mas[3]);
+    printf("%d\n", mas[4]);
 
-    free(x);
+    mas = realloc(mas, 8);
+    printf("%d\n", mas);
 
-    x = NULL;
+    for (int i = 0; i < 8; i++)
+    {
+        printf("%d\n", mas + i);
+        printf("%d\n", mas[i]);
+    }
+    
+
+
 
 
     return 0;
