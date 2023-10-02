@@ -1,4 +1,3 @@
-#include <processenv.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
@@ -11,16 +10,20 @@ typedef struct SOjbect {
     float x,y;
     float vSpeed;
     float width, height;
+    BOOL IsFly;
+    char cType;
 } TObject;
+
 TObject mario;
-TObject brick[1];
+TObject *brick = NULL;
+int brickLength;
 
 char map[mapHeight][mapWidth + 1];
 
 
 void CleanMap() {
     for(int i = 0; i < mapWidth; i++) {
-        map[0][i] = '.';
+        map[0][i] = ' ';
     }
 
     for (int j = 0; j < mapHeight; j++) {
@@ -40,21 +43,35 @@ void SetObjectPos(TObject *obj, float xPos, float yPos) {
     (*obj).y = yPos;
 }
 
-void InitObject(TObject *obj, float xPos, float yPos, float oWidth, float oHeight) {
+void InitObject(TObject *obj, float xPos, float yPos, float oWidth, float oHeight, char inType) {
     SetObjectPos(obj, xPos, yPos);
     (*obj).width = oWidth;
     (*obj).height = oHeight;
     (*obj).vSpeed = 0;
+    (*obj).cType = inType;
 }
 
 BOOL IsCollision(TObject o1, TObject o2);
 
+void CreateLevel(int lvl);
+
 void VMoveObject(TObject *obj){
+
+
+    (*obj).IsFly = TRUE;
     (*obj).vSpeed += 0.05;
     SetObjectPos(obj, (*obj).x, (*obj).y + (*obj).vSpeed);
-    if (IsCollision(*obj, brick[0])) {
-        (*obj).y -= (*obj).vSpeed;
-        (*obj).vSpeed = 0;
+    for (int i = 0; i < brickLength; i++) {
+        if (IsCollision(*obj, brick[i])) {
+            (*obj).y -= (*obj).vSpeed;
+            (*obj).vSpeed = 0;
+            (*obj).IsFly = FALSE;
+            if (brick[i].cType == '+') {
+                CreateLevel(2);
+                Sleep(1000);
+            }
+            break;
+        }
     }
 }
 
@@ -73,7 +90,7 @@ void PutObjectOnMap(TObject obj) {
     for (int i = ix; i < (ix + iWidth); i++) {
         for (int j = iy; j < (iy + iHeight); j++) {
             if (IsPosInMap(i, j))
-                map[j][i] = '@';
+                map[j][i] = obj.cType;
         }
     }
 }
@@ -86,17 +103,66 @@ void SetCurs(int x, int y) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+
+void HorizontalMoveMap(float dx) {
+    mario.x -= dx;
+    for (int i = 0; i < brickLength; i++) 
+        if (IsCollision(mario, brick[i])) {
+            mario.x += dx;
+            return;
+        }
+    mario.x += dx;
+
+
+    for (int i = 0; i < brickLength; i++) {
+        brick[i].x += dx;
+    }
+}
+
 BOOL IsCollision(TObject o1, TObject o2) {
     return ((o1.x + o1.width) > o2.x) && (o1.x < (o2.x + o2.width)) &&
           ((o1.y + o1.height) > o2.y) && (o1.y < (o2.y + o2.height));
 }
 
+void CreateLevel(int lvl) {
+
+    InitObject(&mario, 39, 10, 3, 3, '@');
+
+    if (lvl == 1) {
+        brickLength = 6;
+        brick = realloc(brick, sizeof(*brick) * brickLength);
+
+        InitObject(brick+0, 20, 20, 40, 5, '#');
+        InitObject(brick+1, 60, 15, 10, 10, '#');
+        InitObject(brick+2, 80, 20, 20, 5, '#');
+        InitObject(brick+3, 120, 15, 10, 10, '#');
+        InitObject(brick+4, 150, 20, 40, 5, '#');
+        InitObject(brick+5, 210, 15, 10, 10, '+');
+    }
+    if (lvl == 2) {
+        brickLength = 12;
+        brick = realloc(brick, sizeof(*brick) * brickLength);
+
+        InitObject(brick+0, 20, 20, 40, 5, '#');
+        InitObject(brick+1, 60, 15, 10, 10, '#');
+        InitObject(brick+2, 80, 20, 20, 5, '#');
+        InitObject(brick+3, 120, 15, 10, 10, '#');
+        InitObject(brick+4, 150, 20, 40, 5, '#');
+        InitObject(brick+5, 200, 15, 10, 10, '#');
+        InitObject(brick+6, 240, 20, 8, 12, '#');
+        InitObject(brick+7, 280, 20, 10, 15, '#');
+        InitObject(brick+8, 310, 15, 10, 10, '#');
+        InitObject(brick+9, 350, 17, 7, 12, '#');
+        InitObject(brick+10, 370, 10, 10, 20, '#');
+        InitObject(brick+11, 411, 20, 5, 5, '+');
+
+    }
+}
+
 
 int main() {
 
-    // printf("%s", "Hello");
-    InitObject(&mario, 39, 10, 3, 3);
-    InitObject(brick, 20, 20, 40, 5);
+    CreateLevel(1);
 
 
     do {
@@ -104,12 +170,17 @@ int main() {
         CleanMap();
 
 
-        if (GetKeyState(VK_SPACE) < 0) mario.vSpeed = -0.7;
+        if ((mario.IsFly == FALSE) && (GetKeyState(VK_SPACE) < 0)) mario.vSpeed = -1;
+        if (GetKeyState('A') < 0) HorizontalMoveMap(1);
+        if (GetKeyState('D') < 0) HorizontalMoveMap(-1);
 
+        if (mario.y > mapHeight) CreateLevel(1);
 
 
         VMoveObject(&mario);
-        PutObjectOnMap(brick[0]);
+        for(int i = 0; i < brickLength; i++) {
+            PutObjectOnMap(brick[i]);
+        }
         PutObjectOnMap(mario);
         SetCurs(0, 0);
         ShowMap();
