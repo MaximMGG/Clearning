@@ -2,6 +2,12 @@
 #include <stdlib.h>
 
 
+void foo(int *p) {
+
+    *p = 234;
+
+}
+
 void CreateInt(int **p) {
     *p = malloc(sizeof(int));
 }
@@ -15,18 +21,14 @@ void FreeMemory(int **p) {
 
 int main() {
 
-    int *a = NULL;
+    int i = 123;
+    int *a = &i;
 
-    CreateInt(&a);
+    foo(a);
 
-    if (a != NULL) {
-        *a = 777;
-        printf("%d\n", *a);
-    }
-
-    FreeMemory(&a);
-
+    printf("%d\n", *a);
     printf("%d\n", a);
+
 
     return 0;
 }
