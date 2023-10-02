@@ -1,2 +1,2 @@
-gcc -o go nine.c
+gcc -o go Ten.c
 go
