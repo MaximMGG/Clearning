@@ -1,6 +1,6 @@
 @echo off
 
-gcc -o project Game3.c
+gcc -o project eleven.c
 
 .\project
 

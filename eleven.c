@@ -1,21 +1,22 @@
 #include <stdio.h>
 
 
-void changeInt(int *a) {
+
+struct Sint {
+    int x;
+    char y;
+};
+
+typedef struct Sint Spec;
+typedef struct Sint *pSpec;
 
 
-    *a += 3;
+typedef int i32, *pI32;
 
-    printf("%d\n", *a);
-}
 
 
 int main() {
 
-
-    int a = 14;
-
-    changeInt(&a);
 
     return 0;
 }
