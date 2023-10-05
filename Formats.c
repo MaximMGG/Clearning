@@ -101,6 +101,11 @@ double hypotenuse() {
 
 
 void ifStatements() {
+
+    for(int i = 0; i < 1; i++){
+
+    }
+
     int age;
 
     printf("Enter you age: ");

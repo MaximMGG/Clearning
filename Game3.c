@@ -12,11 +12,15 @@ typedef struct SOjbect {
     float width, height;
     BOOL IsFly;
     char cType;
+    float horizSpeed;
 } TObject;
 
 TObject mario;
 TObject *brick = NULL;
 int brickLength;
+
+TObject *moving = NULL;
+int movingLength;
 
 char map[mapHeight][mapWidth + 1];
 
@@ -38,6 +42,10 @@ void ShowMap() {
     }
 }
 
+void HorizontalMoveObject(TObject *obj) {
+    obj[0].x += obj[0].horizSpeed;
+}
+
 void SetObjectPos(TObject *obj, float xPos, float yPos) {
     (*obj).x = xPos;
     (*obj).y = yPos;
@@ -49,6 +57,7 @@ void InitObject(TObject *obj, float xPos, float yPos, float oWidth, float oHeigh
     (*obj).height = oHeight;
     (*obj).vSpeed = 0;
     (*obj).cType = inType;
+    (*obj).horizSpeed = 0.2;
 }
 
 BOOL IsCollision(TObject o1, TObject o2);
@@ -117,6 +126,10 @@ void HorizontalMoveMap(float dx) {
     for (int i = 0; i < brickLength; i++) {
         brick[i].x += dx;
     }
+
+    for(int i = 0; i < movingLength; i++){
+        moving[i].x += dx;
+    }
 }
 
 BOOL IsCollision(TObject o1, TObject o2) {
@@ -138,6 +151,9 @@ void CreateLevel(int lvl) {
         InitObject(brick+3, 120, 15, 10, 10, '#');
         InitObject(brick+4, 150, 20, 40, 5, '#');
         InitObject(brick+5, 210, 15, 10, 10, '+');
+        movingLength = 1;
+        moving = realloc(moving, sizeof(*moving) * movingLength);
+        InitObject(moving + 0, 25, 10, 3, 2, 'o');
     }
     if (lvl == 2) {
         brickLength = 12;
@@ -180,6 +196,12 @@ int main() {
         VMoveObject(&mario);
         for(int i = 0; i < brickLength; i++) {
             PutObjectOnMap(brick[i]);
+        }
+
+        for(int i = 0; i < movingLength; i++) {
+            VMoveObject(moving + i);
+            HorizontalMoveObject(moving + i);
+            PutObjectOnMap(moving[i]);
         }
         PutObjectOnMap(mario);
         SetCurs(0, 0);

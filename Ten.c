@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 
 
@@ -24,16 +25,16 @@ int ter(int i) {
     return i > 10 ? 10 : i > 100 ? 100 : 1000;
 }
 
-int sPow(int i, int count) {
-    return sPow(1, 2);
-}
 
 int main() {
 
+    int b = (int)round(pow(3, 5));
 
 
-    int a = MyFacorial(3);
-    printf("%d", a);
+    printf("%d\n", b);
+
+    // int a = MyFacorial(3);
+    // printf("%d", a);
     // MePrint(15);
 
 
