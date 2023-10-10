@@ -1,6 +1,6 @@
 @echo off
 
-gcc -o project hiden.c
+gcc -o project string.c
 
 .\project
 
