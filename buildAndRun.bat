@@ -1,6 +1,6 @@
 @echo off
 
-gcc -o project workwithfiles2.c
+gcc -o project files3.c
 
 .\project
 
