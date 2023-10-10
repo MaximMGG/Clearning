@@ -39,40 +39,30 @@ void task() {
 
     int arr[5] = {1, 2, 3, 4, 5};
 
-    for(int i = 0; i < 5; i++){
-        fprintf(file, "%d", arr[i]);
-    }
-
-
+    fwrite(&arr, 1, sizeof(arr), file);
     fclose(file);
 
     int arrcopy[5];
-
     fopen("test5task.txt", "r");
-
+    fread(&arrcopy, 1, sizeof(arrcopy), file);
     for(int i = 0; i < 5; i++){
-        fscanf(file, "%d", arrcopy[i]);
         printf("%d\n", arrcopy[i]);
     }
     fclose(file);
 
     _fmode = _O_BINARY;
 
-    fopen("test5task.txt", "w");
+    file = fopen("test5task.txt", "w");
 
     int arr2[5] = {1, 2, 26, 4, 5};
 
-    for(int i = 0; i < 5; i++){
-        fprintf(file, "%d", arr[i]);
-    }
+    fwrite(&arr2, 1, sizeof(arr2), file);
     fclose(file);
 
     int arrcopy2[5];
-
     fopen("test5task.txt", "r");
-
+    fread(&arrcopy2, 1, sizeof(arrcopy2), file);
     for(int i = 0; i < 5; i++){
-        fscanf(file, "%d", arrcopy2[i]);
         printf("%d\n", arrcopy2[i]);
     }
     fclose(file);
