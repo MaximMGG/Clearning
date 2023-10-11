@@ -1,4 +1,4 @@
 @echo off
-gcc -o go commandLine.c
+gcc -o go oppoin.c
 
-.\go 2 '*' 3
+.\go 
