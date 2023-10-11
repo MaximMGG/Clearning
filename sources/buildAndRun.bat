@@ -1,4 +1,4 @@
 @echo off
-gcc -o go functions.c
+gcc -o go operation.c
 
 .\go
