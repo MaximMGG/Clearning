@@ -1,4 +1,4 @@
 @echo off
-gcc -o go oppoin.c
+gcc -o go hardinit.c
 
 .\go 
