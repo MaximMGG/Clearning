@@ -3,8 +3,6 @@
 #include "core.c"
 
 
-static int a;
-
 
 int sqrd(int a, int b);
 

@@ -1,4 +1,4 @@
 @echo off
-gcc -o go operation.c
+gcc -o go commandLine.c
 
-.\go
+.\go 2 '*' 3
