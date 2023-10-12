@@ -1,4 +1,4 @@
 @echo off
-gcc -o go hardinit.c
+gcc -o go liqidSum.c
 
 .\go 
