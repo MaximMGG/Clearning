@@ -1,4 +1,4 @@
 @echo off
-gcc -o go liqidSum.c
+gcc -o go arr2.c
 
 .\go 

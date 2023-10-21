@@ -1,6 +1,6 @@
 @echo off
 
-gcc -o project string.c
+gcc -o project Assert.c
 
-.\project
+project
 
