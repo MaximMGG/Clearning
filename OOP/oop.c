@@ -32,26 +32,17 @@ void destructor(struct s_student *this) {
 
 int main() {
 
-    struct s_student s;
-
-    student_init(&s, 20, "Jogn");
-
-    print(&s);
-
-    aging(&s);
-
-    print(&s);
-
-    destructor(&s);
-
 
     // m_string *p = cr_str("Hello");
     // printf("%s\n", p->str);
-    // 
+    //
     // char *example = "My name is Bob";
     //
     // p->fm_strcpy(p, example);
     // printf("%s\n", p->str);
+
+    m_string *str = cr_str(str_format("Hello %s, I am very besy", "Bobbi"));
+    printf("%s\n", str->str);
 
     return 0;
 }

@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdarg.h>
 
 
 typedef struct m_string{
@@ -14,3 +15,4 @@ typedef struct {
 m_string *cr_str(const char *s);
 char * set_string(const char *s);
 void * m_strcpy(m_string *str, const char *s);
+char * str_format(char *s, ...);
