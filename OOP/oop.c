@@ -41,8 +41,10 @@ int main() {
     // p->fm_strcpy(p, example);
     // printf("%s\n", p->str);
 
-    m_string *str = cr_str(str_format("Hello %s, I am very besy", "Bobbi"));
+    m_string *str = cr_str(str_format("Hello ms %s, heppy to see you in %s, are you with your %s?", "Johnson", "Plasa Hotel", "wife"));
+
     printf("%s\n", str->str);
+    printf("%d\n", str->length);
 
     return 0;
 }

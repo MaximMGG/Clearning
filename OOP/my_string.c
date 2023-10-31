@@ -1,4 +1,3 @@
-#include <_mingw_stdarg.h>
 #include <stdlib.h>
 #include "my_string.h"
 
@@ -10,6 +9,7 @@ char * set_string(const char *s) {
 m_string *cr_str(const char *s) {
     m_string *p_s = malloc(sizeof(*p_s));
     m_strcpy(p_s, s);
+
     p_s->fm_strcpy = m_strcpy;
     return p_s;
 }
@@ -20,21 +20,24 @@ void * m_strcpy(m_string *target, const char *s) {
         return NULL;
     }
 
-    int length;
+    int length = 0;
 
     for(int i = 0; ; i++){
         target->str[i] = s[i];
         if (s[i] == '\0') {
+            target->str[i] = '\0';
             length = i;
             break;
         }
     }
-
+    target->length = length;
 }
 
+
 char * insertString(char *s, char *tmp, int pos){
-    char *buf = malloc(sizeof(*s + *tmp));
+    char *buf = malloc(sizeof(*s) + sizeof(*tmp) + sizeof(char) * 3);
     int index;
+
     for(index = 0; index < pos; index++){
         buf[index] = s[index];
     }
@@ -43,12 +46,16 @@ char * insertString(char *s, char *tmp, int pos){
         buf[index] = tmp[i];
     }
 
-    for(int i = pos + 2; s[i] != '\0'; i++, index++){
+    for(int i = pos + 2; ; i++, index++){
+        if (s[i] == '\0') {
+            buf[index] = '\0';
+            break;
+        }
         buf[index] = s[i];
     }
-
     return buf;
 }
+
 
 char * str_format(char *s,...) {
     va_list li;
