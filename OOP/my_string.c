@@ -1,12 +1,13 @@
 #include <stdlib.h>
 #include "my_string.h"
+#include <stdio.h>
 
 
 char * set_string(const char *s) {
 
 }
 
-m_string *cr_str(const char *s) {
+m_string *cr_str(char *s) {
     m_string *p_s = malloc(sizeof(*p_s));
     m_strcpy(p_s, s);
 
@@ -14,8 +15,19 @@ m_string *cr_str(const char *s) {
     return p_s;
 }
 
-void * m_strcpy(m_string *target, const char *s) {
-    target->str = malloc(sizeof(*s));
+unsigned int str_length(char *buf) {
+    unsigned int length = 0;
+    for(int i = 0; ; i++) {
+        if (buf[i] == '\0') {
+            length = i;
+            break;
+        }
+    }
+    return length;
+}
+
+void * m_strcpy(m_string *target, char *s) {
+    target->str = malloc(sizeof(char) * (str_length(s)));
     if (target->str == NULL) {
         return NULL;
     }
@@ -31,11 +43,28 @@ void * m_strcpy(m_string *target, const char *s) {
         }
     }
     target->length = length;
+    return target->str;
+}
+
+char * str_cpy(char *target, char *buf) {
+    target = malloc(sizeof(char) * str_length(buf));
+
+    for(int i = 0; ; i++) {
+        if (buf[i] == '\0') {
+            target[i] = '\0';
+            break;
+        }
+        target[i] = buf[i];
+    }
+    return target;
 }
 
 
 char * insertString(char *s, char *tmp, int pos){
-    char *buf = malloc(sizeof(*s) + sizeof(*tmp) + sizeof(char) * 3);
+    long a = sizeof(char) * (str_length(s));
+    long b = sizeof(char) * (str_length(tmp));
+    printf("%ld, %ld", a, b);
+    char *buf = malloc(a + b);
     int index;
 
     for(index = 0; index < pos; index++){
@@ -53,20 +82,25 @@ char * insertString(char *s, char *tmp, int pos){
         }
         buf[index] = s[i];
     }
-    return buf;
+    char * tt;
+    tt = str_cpy(tt, buf);
+    free(buf);
+    return tt;
 }
 
 
 char * str_format(char *s,...) {
     va_list li;
     va_start(li, s);
+    char *buf = malloc(sizeof(char *));
 
     for(int i = 0; s[i] != '\0'; i++){
         if (s[i] == '%') {
             switch(s[i + 1]) {
                 case 's':
-                    char *buf = va_arg(li, char *);
-                    s = insertString(s, buf, i);
+                    buf = va_arg(li, char *);
+                    char *temp = insertString(s, buf, i);
+                    s = str_cpy(s, temp);
                     break;
             }
         }
