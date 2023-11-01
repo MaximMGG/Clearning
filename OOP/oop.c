@@ -1,50 +1,38 @@
-#include <string.h>
-#include <stdio.h>
 #include "my_string.h"
 
+void getInt(int b, ...) {
 
-struct s_student {
-    int age;
-    char name[40];
-};
+    int *bb = &b;
+    printf("%d\n", *bb);
+    bb += 7;
 
+    // for(int i = 0; i < 20; i++) {
+    //     printf("%c\n", *(bb + i));
+    // }
 
-void student_init(struct s_student *this, int age, const char *name) {
-    strcpy(this->name, name);
-    this->age = age;
-    printf("I AM CREATED: %s - %d\n", this->name, age);
-}
-
-void aging(struct s_student *this) {
-    (this->age)++;
-    printf("%s: I'm now %d years old\n", this->name, this->age);
-}
-
-void print(const struct s_student *this) {
-    printf("%s - %d\n", this->name, this->age);
-}
-
-void destructor(struct s_student *this) {
-    free(this);
-    printf("I AM DESTROYED\n");
-    print(this);
+    printf("%c\n", *bb);
+    bb += 2;
+    printf("%c\n", *bb);
+    bb += 2;
+    printf("%c\n", *bb);
+    bb += 2;
 }
 
 int main() {
 
+    char *a = "Johnson";
+    char *b = "Plasa hotel";
+    char *c = "wife";
 
-    // m_string *p = cr_str("Hello");
-    // printf("%s\n", p->str);
-    //
-    // char *example = "My name is Bob";
-    //
-    // p->fm_strcpy(p, example);
-    // printf("%s\n", p->str);
+    str *mystring = cr_str(str_format("Hello %s, heppy to see you in aur %s, are with your %s?", a, b));
 
-    m_string *str = cr_str(str_format("Hello ms %s, heppy to see you in %s, are you with your %s?", "Johnson", "Plasa Hotel", "wife"));
+    printf("String is -> %s\n", mystring->str);
+    printf("Length is -> %d\n", mystring->length);
 
-    printf("%s\n", str->str);
-    printf("%d\n", str->length);
+    puts("-------------------");
+   
+    getInt(3, 'g', 'b', 'q');
 
     return 0;
 }
+
