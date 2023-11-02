@@ -12,6 +12,54 @@ unsigned int str_length(char *buf) {
     return length;
 }
 
+char getCharFromInt(int tmp) {
+    switch(tmp) {
+        case 0:
+            return '0';
+        case 1:
+            return '1';
+        case 2:
+            return '2';
+        case 3:
+            return '3';
+        case 4:
+            return '4';
+        case 5:
+            return '5';
+        case 6:
+            return '6';
+        case 7:
+            return '7';
+        case 8:
+            return '8';
+        case 9:
+            return '9';
+        default: 
+            return '0';
+    }
+}
+
+char * mapIntToString(int buf) {
+    char *s = malloc(sizeof(char) * 10);
+    int s_index = 0;
+    int tmp;
+
+    for(int i = 0; i < 10;i++) {
+        if ((tmp = buf / num[i]) > 0) {
+            s[s_index] = getCharFromInt(tmp);
+            s_index++;
+            buf = buf % num[i];
+        } else if (tmp == 0) {
+            if (s_index != 0) {
+                s[s_index] = getCharFromInt(tmp);
+                s_index++;
+                buf = buf % num[i];
+            }
+        }
+    }
+    return s;
+}
+
 char * str_set(char *s) {
     char *buf = malloc(sizeof(char) * str_length(s));
     for(int i = 0; ; i++) {
@@ -95,16 +143,21 @@ char * insertString(char *s, char *tmp, int pos){
 char * str_format(char *s,...) {
     va_list li;
     va_start(li, s);
-    char *buf = malloc(sizeof(char *));
+    char *buf_s = malloc(sizeof(char *));
+    int buf_i;
 
     for(int i = 0; s[i] != '\0'; i++){
         if (s[i] == '%') {
             switch(s[i + 1]) {
                 case 's':
-                    buf = va_arg(li, char *);
-                    char *temp = insertString(s, buf, i);
-                    s = _str_cpy(s, temp);
+                    buf_s = va_arg(li, char *);
+                    char *temp_s = insertString(s, buf_s, i);
+                    s = _str_cpy(s, temp_s);
                     break;
+                case 'd':
+                    buf_i = va_arg(li, int);
+                    char *temp_i = insertString(s, mapIntToString(buf_i), i);
+                    s = _str_cpy(s, temp_i);
             }
         }
 
