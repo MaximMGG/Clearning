@@ -14,7 +14,8 @@ int main() {
     //
     // str_distroy(mystring);
 
-    str *s_i = cr_str(str_format("I am %s, and i have %d, bolls", "Jimmy", 4123));
+    str *s_i = cr_str(str_format("I am %s, and i have %d, bolls, and you %s, how meny bolls do you have, maby %d",
+                    "Jimmy", 4123, "Molly", 123123123));
 
     printf("String is %s\n", s_i->str);
     printf("Length is -> %d\n", s_i->length);

@@ -75,6 +75,10 @@ char * mapIntToString(int buf) {
                 buf = buf % *(num[i]);
             }
         }
+        if (buf <= 9) {
+            s[s_index] = getCharFromInt(buf);
+            break;
+        }
     }
     return s;
 }
