@@ -17,9 +17,11 @@ str *cr_str(char *s);
 char * str_set(char *s);
 void * str_cpy(str *to, str *from);
 char * str_format(char *s, ...);
+void str_distroy(str *s);
 
+int ** getPacOfDicimal();
 
-enum {
+enum T{
     BIL = 1000000000,
     MIL_100 = 100000000,
     MIL_10 = 10000000,
@@ -32,4 +34,3 @@ enum {
 };
 
 
-const int num[9] = {BIL, MIL_100, MIL_10, MIL, SOU_100, SOU_10, SOU, HAN_100, HAN_10};

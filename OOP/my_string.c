@@ -39,21 +39,40 @@ char getCharFromInt(int tmp) {
     }
 }
 
+int ** getPacOfDicimal() {
+    int **buf = malloc(sizeof(int *) * 9);
+    for(int i = 0; i < 9; i++) {
+        buf[i] = malloc(sizeof(int));
+    }
+    *(buf[0]) = BIL;
+    *(buf[1]) = MIL_100;
+    *(buf[2]) = MIL_10;
+    *(buf[3]) = MIL;
+    *(buf[4]) = SOU_100;
+    *(buf[5]) = SOU_10;
+    *(buf[6]) = SOU;
+    *(buf[7]) = HAN_100;
+    *(buf[8]) = HAN_10;
+    return buf;
+}
+
 char * mapIntToString(int buf) {
+
     char *s = malloc(sizeof(char) * 10);
     int s_index = 0;
     int tmp;
+    int **num = getPacOfDicimal();
 
     for(int i = 0; i < 10;i++) {
-        if ((tmp = buf / num[i]) > 0) {
+        if ((tmp = buf / *(num[i])) > 0) {
             s[s_index] = getCharFromInt(tmp);
             s_index++;
-            buf = buf % num[i];
+            buf = buf % *(num[i]);
         } else if (tmp == 0) {
             if (s_index != 0) {
                 s[s_index] = getCharFromInt(tmp);
                 s_index++;
-                buf = buf % num[i];
+                buf = buf % *(num[i]);
             }
         }
     }
@@ -164,5 +183,9 @@ char * str_format(char *s,...) {
     }
     va_end(li);
     return s;
+}
+
+void str_distroy(str *s) {
+    free(s);
 }
 
