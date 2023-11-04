@@ -1,6 +1,14 @@
-prog: oop.o my_string.o
-	gcc oop.c my_string.c
-oop.o: oop.c my_string.c
-	gcc -c oop.c
-my_string.o: my_string.c my_string.h
-	gcc -c my_string.c
+TARGET = string
+CC = gcc
+
+SRC = $(wildcard *.c)
+OBJ = $(patsubst %.c, %.o, $(SRC))
+
+$(TARGET) : $(OBJ)
+	$(CC) $(OBJ) -o $(TARGET)
+
+$(OBJ) : $(SRC)
+	$(CC) -c $< -o $@
+
+clean :
+	rm *.o $(TARGET)

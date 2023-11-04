@@ -1,3 +1,7 @@
+#ifndef _MY_STR_H_
+
+#define _MY_STR_H_
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
@@ -18,6 +22,7 @@ char * str_set(char *s);
 void * str_cpy(str *to, str *from);
 char * str_format(char *s, ...);
 void str_distroy(str *s);
+int str_cmp(str *one, str *two);
 
 int ** getPacOfDicimal();
 char * mapIntToString(int buf);
@@ -34,4 +39,4 @@ enum T{
     HAN_10 = 10
 };
 
-
+#endif // _MY_STR_H_

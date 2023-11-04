@@ -1,5 +1,4 @@
 #include "my_string.h"
-#include <stdio.h>
 
 unsigned int str_length(char *buf) {
     unsigned int length = 0;
@@ -33,6 +32,26 @@ char * mapDoubleToString(double buf) {
 
 
     return NULL;
+}
+
+/*
+ * return 0 if one and two strings not the same
+ * return 1 if one and two strings are the same
+*/
+int str_cmp(str *one, str *two) {
+    unsigned int one_length = str_length(one->str);
+    unsigned int two_length = str_length(two->str);
+
+    if (one_length != two_length) {
+        return 0;
+    } else {
+        for(int i = 0; i < one_length; i++) {
+            if (one->str[i] != two->str[i]) {
+                return 0;
+            }
+        }
+    }
+    return 1;
 }
 
 char * mapIntToString(int buf) {
