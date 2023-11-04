@@ -20,6 +20,7 @@ char * str_format(char *s, ...);
 void str_distroy(str *s);
 
 int ** getPacOfDicimal();
+char * mapIntToString(int buf);
 
 enum T{
     BIL = 1000000000,
