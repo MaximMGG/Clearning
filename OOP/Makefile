@@ -12,3 +12,11 @@ $(OBJ) : $(SRC)
 
 clean :
 	rm *.o $(TARGET)
+
+test: testString.o my_string.o
+	$(CC) testString.o my_string.o -o test
+
+testString.o: testString.c
+	$(CC) -c testString.c -o testString.o
+
+

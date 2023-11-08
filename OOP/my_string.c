@@ -34,6 +34,34 @@ char * mapDoubleToString(double buf) {
     return NULL;
 }
 
+str * str_concat(str *first, str *second, char symbol) {
+    char* buf = malloc(sizeof(char) * (first->length + second->length));
+    int i = 0;
+    int j = 0;
+    
+    for( ; ;i++) {
+        if (first->str[i] == '\0') {
+            buf[i] = symbol;
+            i++;
+            break;
+        }
+        buf[i] = first->str[i];
+    }
+
+    for( ; ;i++, j++) {
+        if (second->str[j] == '\0') {
+            buf[i] = '\0';
+            break;
+        }
+        buf[i] = second->str[j];
+    }
+
+    str *new = cr_str(buf);
+    free(buf);
+
+    return new;
+}
+
 /*
  * return 0 if one and two strings not the same
  * return 1 if one and two strings are the same
@@ -96,7 +124,7 @@ char * str_set(char *s) {
 }
 
 str *cr_str(char *s) {
-    str *p_s = malloc(sizeof(*p_s));
+    str *p_s = malloc(sizeof(char) * str_length(s));
     p_s->str = str_set(s);
     p_s->length = str_length(s);
     return p_s;
