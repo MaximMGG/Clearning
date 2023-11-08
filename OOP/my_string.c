@@ -103,6 +103,7 @@ char * mapIntToString(int buf) {
         }
         if (buf <= 9) {
             s[s_index] = buf + 48;
+            s[s_index + 1] = '\0';
             break;
         }
     }
